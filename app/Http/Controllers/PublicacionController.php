@@ -22,8 +22,8 @@ class PublicacionController extends Controller
         $publicaciones = DB::table('post')
             ->join('usuarios', 'post.usuario-id', '=', 'usuarios.usuario-id')
             ->get(['post.*', 'usuarios.usuario-nombre as usuario_nombre']);
-
-        return view('publicacion.index', ['lista' => $publicaciones]);
+        // dd($publicaciones);
+        return view('publicacion.index', ['ListaDePublicaciones' => $publicaciones]);
     }
 
     /**
@@ -50,8 +50,8 @@ class PublicacionController extends Controller
         ]);
 
         $post = new Publications();
-        $post->{'post-titulo'} = $request->input('titulo');
-        $post->{'post-public'} = $request->input('contenido');
+        $post->{'titulo'} = $request->input('titulo');
+        $post->{'public'} = $request->input('contenido');
         $post->{'usuario-id'} = Auth::user()->{'usuario-id'}; // Obtiene el usuario_id del usuario autenticado
         $post->save();
         return view('publicacion.store');
@@ -82,7 +82,7 @@ class PublicacionController extends Controller
      */
     public function edit($id)
     {
-        return view('publicacion.edit', ['post' => publications::where('post-id', $id)->first()]);
+        return view('publicacion.edit', ['post' => publications::where('id', $id)->first()]);
     }
 
     /**
@@ -99,9 +99,9 @@ class PublicacionController extends Controller
             'contenido' => 'required',
         ]);
 
-        $post = publications::where('post-id', $id)->first();
-        $post->{'post-titulo'} = $request->input('titulo');
-        $post->{'post-public'} = $request->input('contenido');
+        $post = publications::where($id)->first();
+        $post->{'titulo'} = $request->input('titulo');
+        $post->{'public'} = $request->input('contenido');
         $post->save();
         return 'Publicacion modificada';
     }
@@ -114,7 +114,7 @@ class PublicacionController extends Controller
      */
     public function destroy($id)
     {
-        $post = publications::where('post-id', $id)->first();
+        $post = publications::where('id', $id)->first();
         $post->delete();
         return 'Registro ELIMINADO';
     }

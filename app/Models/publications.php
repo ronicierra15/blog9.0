@@ -9,7 +9,6 @@ class publications extends Model
 {
     use HasFactory;
     protected $table = 'post';
-    protected $primaryKey = 'post-id';
     public function blog()
     {
         return $this->belongsTo(blog::class, 'usuario-id');

@@ -11,22 +11,22 @@
     @endphp
 
     <hr>
-    @foreach ($lista as $publicacion)
-        <strong>{{ $publicacion->{'post-titulo'} }}</strong>
+    @foreach ($ListaDePublicaciones as $publicacion)
+        <strong>{{ $publicacion->{'titulo'} }}</strong>
         <br>
-        {{ $publicacion->{'post-public'} }}
+        {{ $publicacion->{'public'} }}
         <br />
         <br />
         <h3>Creado por: {{ $publicacion->usuario_nombre }}</h3>
         <br />
 
         @if (Auth::check() && Auth::user()->{'usuario-id'} == $publicacion->{'usuario-id'})
-            <form action="{{ url('publicacion/' . $publicacion->{'post-id'}) }}" method="POST">
+            <form action="{{ url('publicacion/' . $publicacion->{'id'}) }}" method="POST">
                 @method('delete')
                 @csrf
                 <button type="submit">Eliminar</button>
             </form>
-            <form action="{{ url('publicacion/' . $publicacion->{'post-id'}) . '/edit' }} " method="GET">
+            <form action="{{ url('publicacion/' . $publicacion->{'id'}) . '/edit' }} " method="GET">
                 @method('edit')
                 @csrf
                 <button type="submit">Actualizar</button>
