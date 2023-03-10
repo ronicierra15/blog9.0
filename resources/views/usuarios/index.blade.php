@@ -1,23 +1,21 @@
 @extends('layouts.app')
 
-@section('title', 'usuario')
+@section('title', 'Edital perfil')
 
 @section('content')
     <section>
-        <h2>Aqui vamos a mostar el intefas de ingresar y crear cuenta</h2>
-
-        <hr>
+        <h2>Editar perfil</h2>
         @foreach ($ListaDeUsuarios as $usuarios)
-            <strong>Nombre:</strong>
-            {{ $usuarios->{'nombre'} }}
-            <br>
-            <strong>Apellido:</strong>
-            {{ $usuarios->{'apellido'} }}
-            <br />
-            <strong>Correo:</strong>
-            {{ $usuarios->{'email'} }}
-            <br />
             @if (Auth::check() && Auth::user()->{'id'} == $usuarios->{'id'})
+                <strong>Nombre:</strong>
+                {{ $usuarios->{'nombre'} }}
+                <br>
+                <strong>Apellido:</strong>
+                {{ $usuarios->{'apellido'} }}
+                <br />
+                <strong>Correo:</strong>
+                {{ $usuarios->{'email'} }}
+                <br />
                 <form action="{{ url('usuarios/' . $usuarios->{'id'}) }}" method="POST">
                     @method('delete')
                     @csrf
@@ -29,11 +27,6 @@
                     <button type="submit">Actualizar</button>
                 </form>
             @endif
-            <br />
-
-            <hr>
         @endforeach
-
-
     </section>
 @endsection

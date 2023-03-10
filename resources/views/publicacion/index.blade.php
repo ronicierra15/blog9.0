@@ -4,7 +4,7 @@
 
 @section('content')
     <section>
-        <h2>Aqui vamos a mostar las publicacion, este el index del post</h2>
+        <h2>Publicaciones</h2>
     </section>
     @php
         $usuarios = isset($usuarios) ? $usuarios : null;
@@ -12,12 +12,11 @@
 
     <hr>
     @foreach ($ListaDePublicaciones as $publicacion)
-        <strong>{{ $publicacion->{'titulo'} }}</strong>
-        <br>
+        <h2>{{ $publicacion->{'titulo'} }}</h2>
         {{ $publicacion->{'public'} }}
         <br />
         <br />
-        <h3>Creado por: {{ $publicacion->nombre }} {{ $publicacion->apellido }}</h3>
+        <strong>Creado por: {{ $publicacion->nombre }} {{ $publicacion->apellido }}</strong>
         <br />
 
         @if (Auth::check() && Auth::user()->{'id'} == $publicacion->{'usuario-id'})

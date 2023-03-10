@@ -97,7 +97,7 @@ class UsuariosController extends Controller
         $usuarios->{'nombre'} = $request->input('nombre');
         $usuarios->{'apellido'} = $request->input('apellido');
         $usuarios->{'email'} = $request->input('correo');
-        $usuarios->{'clave'} = $request->input('contraseña');
+        $usuarios->{'clave'} = Hash::make($request->input('contraseña'));
         $usuarios->save();
         return 'usuario modificado';
     }
