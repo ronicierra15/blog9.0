@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\blog;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -17,8 +17,8 @@ class UsuariosController extends Controller
      */
     public function index()
     {
-        $usuarios = DB::table('usuarios')->get();
-        return view('usuarios.index', ['lista' => $usuarios]);
+        $usuarios = DB::table('users')->get();
+        return view('usuarios.index', ['ListaDeUsuarios' => $usuarios]);
     }
 
     /**
@@ -45,11 +45,11 @@ class UsuariosController extends Controller
             'contraseña' => 'required',
         ]);
 
-        $usuarios = new blog();
-        $usuarios->{'usuario-nombre'} = $request->input('nombre');
-        $usuarios->{'usuario-apellido'} = $request->input('apellido');
-        $usuarios->{'usuario-correo'} = $request->input('correo');
-        $usuarios->{'usuario-clave'} = Hash::make($request->input('contraseña'));
+        $usuarios = new Users();
+        $usuarios->{'nombre'} = $request->input('nombre');
+        $usuarios->{'apellido'} = $request->input('apellido');
+        $usuarios->{'correo'} = $request->input('correo');
+        $usuarios->{'clave'} = Hash::make($request->input('contraseña'));
         $usuarios->save();
         return view('usuarios.store');
     }
@@ -73,8 +73,8 @@ class UsuariosController extends Controller
      */
     public function edit($id)
     {
-        $usuarios = DB::table('usuarios')->get();
-        return view('usuarios.edit', ['usuarios' => blog::where('usuario-id', $id)->first()]);
+        $usuarios = DB::table('users')->get();
+        return view('usuarios.edit', ['users' => User::where('id', $id)->first()]);
     }
 
     /**
@@ -89,15 +89,15 @@ class UsuariosController extends Controller
         $validacion = $request->validate([
             'nombre' => 'required',
             'apellido' => 'required',
-            'correo' => 'required|email|unique:usuarios,usuario-correo,' . $id . ',usuario-id',
+            'correo' => 'required|email|unique:usuarios,email,' . $id . ',id',
             'contraseña' => 'required',
         ]);
 
-        $usuarios = blog::where('usuario-id', $id)->first();
-        $usuarios->{'usuario-nombre'} = $request->input('nombre');
-        $usuarios->{'usuario-apellido'} = $request->input('apellido');
-        $usuarios->{'usuario-correo'} = $request->input('correo');
-        $usuarios->{'usuario-clave'} = $request->input('contraseña');
+        $usuarios = Users::where('id', $id)->first();
+        $usuarios->{'nombre'} = $request->input('nombre');
+        $usuarios->{'apellido'} = $request->input('apellido');
+        $usuarios->{'correo'} = $request->input('correo');
+        $usuarios->{'clave'} = $request->input('contraseña');
         $usuarios->save();
         return 'usuario modificado';
     }

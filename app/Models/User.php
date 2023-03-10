@@ -18,28 +18,28 @@ class User extends Authenticatable
      *
      * @var string
      */
-    protected $table = 'usuarios';
+    protected $table = 'users';
 
     /**
      * The primary key associated with the table.
      *
      * @var string
      */
-    protected $primaryKey = 'usuario-id';
+    protected $primaryKey = 'id';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['usuario-nombre', 'usuario-apellido', 'usuario-correo', 'usuario-clave'];
+    protected $fillable = ['nombre', 'apellido', 'email', 'clave'];
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = ['usuario-clave', 'remember_token'];
+    protected $hidden = ['clave', 'remember_token'];
 
     /**
      * The attributes that should be cast to native types.
@@ -57,7 +57,7 @@ class User extends Authenticatable
      */
     public function getAuthPassword()
     {
-        return $this->{'usuario-clave'};
+        return $this->{'clave'};
     }
 
     /**
@@ -65,7 +65,7 @@ class User extends Authenticatable
      */
     public function publications()
     {
-        return $this->hasMany(Publications::class, 'usuario-id');
+        return $this->hasMany(Publications::class, 'id');
     }
 
     /**
@@ -88,6 +88,6 @@ class User extends Authenticatable
     {
         $hasher = app('hash');
 
-        return $hasher->check($credentials['usuario-clave'], $this->{'usuario-clave'});
+        return $hasher->check($credentials['clave'], $this->{'clave'});
     }
 }

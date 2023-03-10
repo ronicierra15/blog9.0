@@ -9,8 +9,8 @@ class publications extends Model
 {
     use HasFactory;
     protected $table = 'post';
-    public function blog()
+    public function users()
     {
-        return $this->belongsTo(blog::class, 'usuario-id');
+        return $this->belongsTo(Users::class, 'id');
     }
 }

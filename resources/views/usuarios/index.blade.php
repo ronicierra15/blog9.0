@@ -7,16 +7,16 @@
         <h2>Aqui vamos a mostar el intefas de ingresar y crear cuenta</h2>
 
         <hr>
-        @foreach ($lista as $usuarios)
-            <strong>{{ $usuarios->{'usuario-nombre'} }}</strong>
+        @foreach ($ListaDeUsuarios as $usuarios)
+            <strong>{{ $usuarios->{'nombre'} }}</strong>
             <br>
-            {{ $usuarios->{'usuario-apellido'} }}
+            {{ $usuarios->{'apellido'} }}
             <br />
             {{ $usuarios->{'email'} }}
             <br />
-            {{ $usuarios->{'usuario-clave'} }}
+            {{ $usuarios->{'clave'} }}
             <br />
-            {{ $usuarios->{'usuario-id'} }}
+            {{ $usuarios->{'id'} }}
             <br />
             <br />
             <br />
