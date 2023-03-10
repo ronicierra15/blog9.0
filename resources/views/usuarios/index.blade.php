@@ -8,17 +8,27 @@
 
         <hr>
         @foreach ($ListaDeUsuarios as $usuarios)
-            <strong>{{ $usuarios->{'nombre'} }}</strong>
+            <strong>Nombre:</strong>
+            {{ $usuarios->{'nombre'} }}
             <br>
+            <strong>Apellido:</strong>
             {{ $usuarios->{'apellido'} }}
             <br />
+            <strong>Correo:</strong>
             {{ $usuarios->{'email'} }}
             <br />
-            {{ $usuarios->{'clave'} }}
-            <br />
-            {{ $usuarios->{'id'} }}
-            <br />
-            <br />
+            @if (Auth::check() && Auth::user()->{'id'} == $usuarios->{'id'})
+                <form action="{{ url('usuarios/' . $usuarios->{'id'}) }}" method="POST">
+                    @method('delete')
+                    @csrf
+                    <button type="submit">Eliminar</button>
+                </form>
+                <form action="{{ url('usuarios/' . $usuarios->{'id'}) . '/edit' }} " method="GET">
+                    @method('edit')
+                    @csrf
+                    <button type="submit">Actualizar</button>
+                </form>
+            @endif
             <br />
 
             <hr>

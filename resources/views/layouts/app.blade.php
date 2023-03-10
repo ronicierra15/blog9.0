@@ -54,29 +54,26 @@
                             $usuarios = isset($usuarios) ? $usuarios : null;
                         @endphp
 
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Ajustes
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-
-
-                                {{-- <form action="{{ url('usuarios/' . $usuarios->{'usuario-id'} . '/edit') }}"
-                                    method="GET">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item">Editar perfil</button>
-                                </form> --}}
-
-
-
-
-                                <a class="dropdown-item" href="#">
-                                    Publicacion
+                        @auth
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Ajustes
                                 </a>
-                            </div>
-                        </li>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                                    <form action="{{ url('usuarios/') }}" method="GET">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">Editar perfil</button>
+                                    </form>
+
+                                    <a class="dropdown-item" href="#">
+                                        Publicacion
+                                    </a>
+                                </div>
+                            </li>
+                        @endauth
 
                         @guest
                             @if (Route::has('login'))

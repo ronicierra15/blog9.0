@@ -45,10 +45,10 @@ class UsuariosController extends Controller
             'contraseña' => 'required',
         ]);
 
-        $usuarios = new Users();
+        $usuarios = new User();
         $usuarios->{'nombre'} = $request->input('nombre');
         $usuarios->{'apellido'} = $request->input('apellido');
-        $usuarios->{'correo'} = $request->input('correo');
+        $usuarios->{'email'} = $request->input('correo');
         $usuarios->{'clave'} = Hash::make($request->input('contraseña'));
         $usuarios->save();
         return view('usuarios.store');
@@ -89,14 +89,14 @@ class UsuariosController extends Controller
         $validacion = $request->validate([
             'nombre' => 'required',
             'apellido' => 'required',
-            'correo' => 'required|email|unique:usuarios,email,' . $id . ',id',
+            'correo' => 'required|email|unique:users,email,' . $id . ',id',
             'contraseña' => 'required',
         ]);
 
-        $usuarios = Users::where('id', $id)->first();
+        $usuarios = User::where('id', $id)->first();
         $usuarios->{'nombre'} = $request->input('nombre');
         $usuarios->{'apellido'} = $request->input('apellido');
-        $usuarios->{'correo'} = $request->input('correo');
+        $usuarios->{'email'} = $request->input('correo');
         $usuarios->{'clave'} = $request->input('contraseña');
         $usuarios->save();
         return 'usuario modificado';
