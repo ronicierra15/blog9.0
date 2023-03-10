@@ -17,10 +17,10 @@
         {{ $publicacion->{'public'} }}
         <br />
         <br />
-        <h3>Creado por: {{ $publicacion->usuario_nombre }}</h3>
+        <h3>Creado por: {{ $publicacion->nombre }} {{ $publicacion->apellido }}</h3>
         <br />
 
-        @if (Auth::check() && Auth::user()->{'usuario-id'} == $publicacion->{'usuario-id'})
+        @if (Auth::check() && Auth::user()->{'id'} == $publicacion->{'usuario-id'})
             <form action="{{ url('publicacion/' . $publicacion->{'id'}) }}" method="POST">
                 @method('delete')
                 @csrf

@@ -20,8 +20,8 @@ class PublicacionController extends Controller
     public function index()
     {
         $publicaciones = DB::table('post')
-            ->join('usuarios', 'post.usuario-id', '=', 'usuarios.usuario-id')
-            ->get(['post.*', 'usuarios.usuario-nombre as usuario_nombre']);
+            ->join('users', 'post.usuario-id', '=', 'users.id')
+            ->get(['post.*', 'users.nombre', 'users.apellido']);
         // dd($publicaciones);
         return view('publicacion.index', ['ListaDePublicaciones' => $publicaciones]);
     }
@@ -52,7 +52,7 @@ class PublicacionController extends Controller
         $post = new Publications();
         $post->{'titulo'} = $request->input('titulo');
         $post->{'public'} = $request->input('contenido');
-        $post->{'usuario-id'} = Auth::user()->{'usuario-id'}; // Obtiene el usuario_id del usuario autenticado
+        $post->{'usuario-id'} = Auth::user()->{'id'}; // Obtiene el usuario_id del usuario autenticado
         $post->save();
         return view('publicacion.store');
     }
@@ -99,7 +99,7 @@ class PublicacionController extends Controller
             'contenido' => 'required',
         ]);
 
-        $post = publications::where($id)->first();
+        $post = publications::where('id', $id)->first();
         $post->{'titulo'} = $request->input('titulo');
         $post->{'public'} = $request->input('contenido');
         $post->save();
