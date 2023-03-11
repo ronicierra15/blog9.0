@@ -54,10 +54,11 @@
                             $usuarios = isset($usuarios) ? $usuarios : null;
                         @endphp
 
+
                         @auth
                             <li class="nav-item">
-                                <a class="nav-link" href=" {{ url('usuarios/') }}">
-                                    Editar Perfil</a>
+                                <a class="nav-link" href="{{ url('usuarios/') }}">
+                                    {{ Auth::user()->nombre }}</a>
                             </li>
                         @endauth
 

@@ -51,7 +51,7 @@ class UsuariosController extends Controller
         $usuarios->{'nombre'} = $request->input('nombre');
         $usuarios->{'apellido'} = $request->input('apellido');
         $usuarios->{'email'} = $request->input('correo');
-        $usuarios->{'clave'} = Hash::make($request->input('contraseña'));
+        $usuarios->{'password'} = Hash::make($request->input('contraseña'));
         $usuarios->save();
         return view('usuarios.store');
     }
@@ -98,7 +98,7 @@ class UsuariosController extends Controller
         $usuarios->{'nombre'} = $request->input('nombre');
         $usuarios->{'apellido'} = $request->input('apellido');
         $usuarios->{'email'} = $request->input('correo');
-        $usuarios->{'clave'} = Hash::make($request->input('contraseña'));
+        $usuarios->{'password'} = Hash::make($request->input('contraseña'));
         $usuarios->save();
         return redirect()
             ->route('usuarios.edit', ['usuario' => $id])

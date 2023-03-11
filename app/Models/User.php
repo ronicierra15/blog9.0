@@ -32,14 +32,14 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['nombre', 'apellido', 'email', 'clave', 'remember_token'];
+    protected $fillable = ['nombre', 'apellido', 'email', 'password', 'remember_token'];
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = ['clave', 'remember_token'];
+    protected $hidden = ['password', 'remember_token'];
 
     /**
      * The attributes that should be cast to native types.
@@ -57,7 +57,7 @@ class User extends Authenticatable
      */
     public function getAuthPassword()
     {
-        return $this->{'clave'};
+        return $this->{'password'};
     }
 
     /**
@@ -88,6 +88,6 @@ class User extends Authenticatable
     {
         $hasher = app('hash');
 
-        return $hasher->check($credentials['clave'], $this->{'clave'});
+        return $hasher->check($credentials['password'], $this->{'password'});
     }
 }
