@@ -3,7 +3,7 @@
 @section('title', 'editar post')
 
 @section('content')
-    <section>
+    <div class="" style="margin-left: 8rem;margin-right: 15rem">
         <div class="mb-3">
             <form class="mb-3" action="{{ url('publicacion/' . $post->id) }}" method="POST">
                 @method('PUT')
@@ -22,5 +22,5 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
-    </section>
+    </div>
 @endsection

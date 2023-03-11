@@ -110,6 +110,8 @@ class UsuariosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $usuarios = User::where('id', $id)->first();
+        $usuarios->delete();
+        return 'Usuario eliminado';
     }
 }

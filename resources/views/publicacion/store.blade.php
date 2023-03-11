@@ -3,7 +3,7 @@
 @section('title', 'Publicacion de blog')
 
 @section('content')
-    <section>
+    <div class="" style="margin-left: 8rem;margin-right: 15rem">
         <div class="mb-3">
             <form class="mb-3" action="{{ url('/publicacion') }}" method="POST">
                 @csrf
@@ -17,9 +17,9 @@
                     <label for="exampleInputPassword1" class="form-label">Contenido</label>
                     <input type="textarea" class="form-control" id="exampleInputPassword1" name="contenido">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Publicar</button>
             </form>
-            <p>blog publicado</p>
+            <h2>Blog publicado</h2>
         </div>
-    </section>
+    </div>
 @endsection
