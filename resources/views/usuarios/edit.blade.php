@@ -5,9 +5,15 @@
 @section('content')
     <div class="" style="margin-left: 8rem;margin-right: 22rem">
         <div class="mb-3">
+            @if (session('message'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('message') }}
+                </div>
+            @endif
             <form class="mb-3" action="{{ url('usuarios/' . $users->{'id'}) }}" method="POST">
                 @method('PUT')
                 @csrf
+
                 <div class="mb-3">
                     <strong>
                         <label for="exampleInputEmail1" class="form-label">Nombre</label>

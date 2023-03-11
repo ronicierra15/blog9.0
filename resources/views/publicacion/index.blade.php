@@ -4,6 +4,11 @@
 
 @section('content')
     <div class="" style="margin-left: 8rem;margin-right: 22rem;border-right: 1px solid rgb(189, 189, 189);">
+        @if (session('message'))
+            <div class="alert alert-success" role="alert">
+                {{ session('message') }}
+            </div>
+        @endif
         @foreach ($ListaDePublicaciones as $publicacion)
             <h2><a
                     style="text-decoration: none;color:black"href="{{ url('publicacion/' . $publicacion->{'id'}) }}">{{ $publicacion->{'titulo'} }}</a>

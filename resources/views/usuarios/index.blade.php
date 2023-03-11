@@ -5,6 +5,11 @@
 @section('content')
     <div class="" style="margin-left: 8rem;margin-right: 22rem">
         <h2>Editar perfil</h2>
+        @if (session('message'))
+            <div class="alert alert-success" role="alert">
+                {{ session('message') }}
+            </div>
+        @endif
         @foreach ($ListaDeUsuarios as $usuarios)
             @if (Auth::check() && Auth::user()->{'id'} == $usuarios->{'id'})
                 <div class="mb-3">

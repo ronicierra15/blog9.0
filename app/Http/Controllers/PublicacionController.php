@@ -73,12 +73,6 @@ class PublicacionController extends Controller
         return view('publicacion.show', ['ListaDePublicaciones' => $publicacion]);
     }
 
-    // public function intermedia()
-    // {
-    //     $publicacion = Publicacion::findOrFail($id);
-    //     return view('publicacion.intermedia', compact('publicacion'));
-    // }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -108,7 +102,9 @@ class PublicacionController extends Controller
         $post->{'titulo'} = $request->input('titulo');
         $post->{'public'} = $request->input('contenido');
         $post->save();
-        return 'Publicacion modificada';
+        return redirect()
+            ->route('publicacion.edit', ['publicacion' => $id])
+            ->with('message', 'Publicacion modificada correctamente');
     }
 
     /**
@@ -121,6 +117,8 @@ class PublicacionController extends Controller
     {
         $post = publications::where('id', $id)->first();
         $post->delete();
-        return 'Registro ELIMINADO';
+        return redirect()
+            ->route('publicacion.index')
+            ->with('message', 'Publicacion eliminada correctamente');
     }
 }

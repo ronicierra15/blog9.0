@@ -28,7 +28,9 @@ class UsuariosController extends Controller
      */
     public function create()
     {
-        return view('usuarios.create');
+        return redirect()
+            ->route('usuarios.edit', ['usuario' => $id])
+            ->with('message', 'Usuario modificada correctamente');
     }
 
     /**
@@ -90,7 +92,6 @@ class UsuariosController extends Controller
             'nombre' => 'required',
             'apellido' => 'required',
             'correo' => 'required|email|unique:users,email,' . $id . ',id',
-            'contraseña' => 'required',
         ]);
 
         $usuarios = User::where('id', $id)->first();
@@ -99,7 +100,10 @@ class UsuariosController extends Controller
         $usuarios->{'email'} = $request->input('correo');
         $usuarios->{'clave'} = Hash::make($request->input('contraseña'));
         $usuarios->save();
-        return 'usuario modificado';
+        return redirect()
+            ->route('usuarios.edit', ['usuario' => $id])
+            ->with('message', 'Usuario modificada correctamente');
+        // return 'usuario modificado';
     }
 
     /**
@@ -112,6 +116,10 @@ class UsuariosController extends Controller
     {
         $usuarios = User::where('id', $id)->first();
         $usuarios->delete();
+
+        return redirect()
+            ->route('publicacion.index')
+            ->with('message', 'Usuario eliminado correctamente');
         return 'Usuario eliminado';
     }
 }

@@ -5,6 +5,11 @@
 @section('content')
     <div class="" style="margin-left: 8rem;margin-right: 15rem">
         <div class="mb-3">
+            @if (session('message'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('message') }}
+                </div>
+            @endif
             <form class="mb-3" action="{{ url('publicacion/' . $post->id) }}" method="POST">
                 @method('PUT')
                 @csrf

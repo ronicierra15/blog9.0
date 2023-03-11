@@ -3,10 +3,16 @@
 @section('title', 'Publicacion de blog')
 
 @section('content')
+
     <div class="" style="margin-left: 8rem;margin-right: 15rem">
         <div class="mb-3">
             <form class="mb-3" action="{{ url('/publicacion') }}" method="POST">
                 @csrf
+
+                <div class="alert alert-success" role="alert">
+                    Blog publicado correctamente
+                </div>
+
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Titulo</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
@@ -15,11 +21,10 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Contenido</label>
-                    <input type="textarea" class="form-control" id="exampleInputPassword1" name="contenido">
+                    <textarea class="form-control" id="exampleInputPassword1" name="contenido"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Publicar</button>
             </form>
-            <h2>Blog publicado</h2>
         </div>
     </div>
 @endsection
