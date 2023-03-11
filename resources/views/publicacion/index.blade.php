@@ -5,8 +5,8 @@
 @section('content')
     <div class="" style="margin-left: 8rem;margin-right: 22rem;border-right: 1px solid rgb(189, 189, 189);">
         @foreach ($ListaDePublicaciones as $publicacion)
-            <h2>{{ $publicacion->{'titulo'} }}</h2>
-            {{ $publicacion->{'public'} }}
+            <h2><a href="{{ url('publicacion/' . $publicacion->{'id'}) }}">{{ $publicacion->{'titulo'} }}</a></h2>
+            {{ substr($publicacion->{'public'}, 0, 200) }}{{ strlen($publicacion->{'public'}) > 200 ? '...' : '' }}
             <br />
             <br />
             <strong>Creado por: {{ $publicacion->nombre }} {{ $publicacion->apellido }}</strong>
