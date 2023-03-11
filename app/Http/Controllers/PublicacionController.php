@@ -65,7 +65,12 @@ class PublicacionController extends Controller
      */
     public function show($id)
     {
-        //
+        $publicacion = DB::table('post')
+            ->join('users', 'post.usuario-id', '=', 'users.id')
+            ->where('post.id', $id)
+            ->first(['post.*', 'users.nombre', 'users.apellido']);
+
+        return view('publicacion.show', ['ListaDePublicaciones' => $publicacion]);
     }
 
     // public function intermedia()
