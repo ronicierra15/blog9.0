@@ -92,29 +92,34 @@ class UsuariosController extends Controller
             'nombre' => 'required',
             'apellido' => 'required',
             'correo' => 'required|email|unique:users,email,' . $id . ',id',
-            'contraseñaActual' => 'required',
         ]);
 
         $usuarios = User::where('id', $id)->first();
         $usuarios->{'nombre'} = $request->input('nombre');
         $usuarios->{'apellido'} = $request->input('apellido');
         $usuarios->{'email'} = $request->input('correo');
-        if (Auth::attempt(['email' => $usuarios->email, 'password' => $request->contraseñaActual])) {
-            if ($request->input('contraseñaNueva') == $request->input('contraseñaRepite')) {
-                $usuarios->{'password'} = Hash::make($request->input('contraseñaRepite'));
-                $usuarios->save();
-                return redirect()
-                    ->route('usuarios.edit', ['usuario' => $id])
-                    ->with('message', 'Usuario modificada correctamente');
+        if (empty($request->input('contraseñaActual'))) {
+            return redirect()
+                ->route('usuarios.edit', ['usuario' => $id])
+                ->with('messageError', 'Debes introducir la contraseña actual para realizar cambios');
+        } else {
+            if (Auth::attempt(['email' => $usuarios->email, 'password' => $request->contraseñaActual])) {
+                if ($request->input('contraseñaNueva') == $request->input('contraseñaRepite')) {
+                    $usuarios->{'password'} = Hash::make($request->input('contraseñaRepite'));
+                    $usuarios->save();
+                    return redirect()
+                        ->route('usuarios.edit', ['usuario' => $id])
+                        ->with('message', 'Usuario modificada correctamente');
+                } else {
+                    return redirect()
+                        ->route('usuarios.edit', ['usuario' => $id])
+                        ->with('messageError', 'La nueva clave ingresada no coincide');
+                }
             } else {
                 return redirect()
                     ->route('usuarios.edit', ['usuario' => $id])
-                    ->with('messageError', 'La nueva clave ingresada no coincide');
+                    ->with('messageError', 'La contraseña actual no coincide');
             }
-        } else {
-            return redirect()
-                ->route('usuarios.edit', ['usuario' => $id])
-                ->with('messageError', 'La contraseña actual no coincide');
         }
     }
 
