@@ -10,6 +10,11 @@
                     {{ session('message') }}
                 </div>
             @endif
+            @if (session('messageError'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('messageError') }}
+                </div>
+            @endif
             <form class="mb-3" action="{{ url('usuarios/' . $users->{'id'}) }}" method="POST">
                 @method('PUT')
                 @csrf
@@ -42,21 +47,21 @@
                     <strong>
                         <label for="exampleInputPassword1" class="form-label">contraseña actual</label>
                     </strong>
-                    <input type="password" class="form-control" id="exampleInputPassword1" name="contraseña">
+                    <input type="password" class="form-control" id="exampleInputPassword1" name="contraseñaActual">
                 </div>
 
                 <div class="mb-3">
                     <strong>
                         <label for="exampleInputPassword1" class="form-label">Nueva contraseña</label>
                     </strong>
-                    <input type="password" class="form-control" id="exampleInputPassword1" name="contraseña">
+                    <input type="password" class="form-control" id="exampleInputPassword1" name="contraseñaNueva">
                 </div>
 
                 <div class="mb-3">
                     <strong>
                         <label for="exampleInputPassword1" class="form-label">Repite nueva contraseña</label>
                     </strong>
-                    <input type="password" class="form-control" id="exampleInputPassword1" name="contraseña">
+                    <input type="password" class="form-control" id="exampleInputPassword1" name="contraseñaRepite">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
