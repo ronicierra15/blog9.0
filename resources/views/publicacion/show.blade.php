@@ -4,7 +4,7 @@
     <div class="" style="margin-left: 8rem;margin-right: 22rem;border-right: 1px solid rgb(189, 189, 189);">
         <h2><a {{ url('publicacion/' . $ListaDePublicaciones->{'id'}) }}>{{ $ListaDePublicaciones->{'titulo'} }}</a>
         </h2>
-        {{ $ListaDePublicaciones->{'public'} }}
+        {!! nl2br(e($ListaDePublicaciones->{'public'})) !!}
         <br />
         <br />
         <strong>Creado por: {{ $ListaDePublicaciones->nombre }} {{ $ListaDePublicaciones->apellido }}</strong>

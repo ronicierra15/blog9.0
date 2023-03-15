@@ -15,7 +15,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Contenido</label>
-                    <textarea class="form-control" id="exampleInputPassword1" name="contenido"></textarea>
+                    <textarea class="form-control" id="exampleInputPassword1" name="contenido" rows="5"></textarea>
 
                 </div>
                 <button type="submit" class="btn btn-primary">Publicar</button>

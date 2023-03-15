@@ -21,8 +21,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Contenido</label>
-                    <input type="textarea" class="form-control" id="exampleInputPassword1" name="contenido"
-                        value="{{ old('contenido', $post->{'public'}) }}" rows="8" wrap="soft">
+                    <textarea class="form-control" id="exampleInputPassword1" name="contenido" rows="8" wrap="soft">{{ old('contenido', $post->{'public'}) }}</textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
